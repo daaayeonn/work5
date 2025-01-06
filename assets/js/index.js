@@ -76,7 +76,7 @@ fetch('./assets/data/news_slides.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** .sc-notice swiper 데이터 불러오기
-fetch('/assets/data/notice_slides.json')
+fetch('./assets/data/notice_slides.json')
 .then(response => response.json())
 .then(data => {
   const swiperWrapper = document.getElementById('notice-swiper');
@@ -149,7 +149,7 @@ fetch('/assets/data/notice_slides.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // notice 모달 팝업
-fetch('/assets/data/notice_slides.json')
+fetch('./assets/data/notice_slides.json')
 .then(response => response.json())
 .then(data => {
   const noticeModal = document.getElementById('notice-modal');
@@ -172,7 +172,7 @@ fetch('/assets/data/notice_slides.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** 대구는 지금 공지사항 데이터 불러오기
-fetch('/assets/data/now_notice_slides.json')
+fetch('./assets/data/now_notice_slides.json')
 .then(response => response.json())
 .then(data => {
   const swiperWrapper = document.getElementById('now-notice-swiper');
@@ -224,7 +224,7 @@ fetch('/assets/data/now_notice_slides.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** 대구는 지금 시험공지 데이터 불러오기
-fetch('/assets/data/now_test_slides.json')
+fetch('./assets/data/now_test_slides.json')
 .then(response => response.json())
 .then(data => {
   const swiperWrapper = document.getElementById('now-test-swiper');
@@ -265,7 +265,7 @@ fetch('/assets/data/now_test_slides.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** 대구는 지금 공지사항 모바일 리스트 불러오기
-fetch('/assets/data/now_notice_slides.json')
+fetch('./assets/data/now_notice_slides.json')
 .then(response => response.json())
 .then(data => {
   // 데이터를 4개만 선택
@@ -293,7 +293,7 @@ fetch('/assets/data/now_notice_slides.json')
 });
 
 // ** 대구는 지금 시험 모바일 리스트 불러오기
-fetch('/assets/data/now_test_slides.json')
+fetch('./assets/data/now_test_slides.json')
 .then(response => response.json())
 .then(data => {
   // 데이터를 4개만 선택
@@ -321,7 +321,7 @@ fetch('/assets/data/now_test_slides.json')
 });
 
 // ** .sc-service swiper (대구시 운영 서비스) 데이터 불러오기
-fetch('/assets/data/favorites_service.json')
+fetch('./assets/data/favorites_service.json')
 .then(response => response.json())
 .then(data => {
   const swiperWrapper = document.getElementById('service-swiper');
@@ -394,7 +394,7 @@ fetch('/assets/data/favorites_service.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** .sc-service 모달팝업 데이터 불러오기
-fetch('/assets/data/favorites_service.json')
+fetch('./assets/data/favorites_service.json')
 .then(response => response.json())
 .then(data => {
   const serviceModal = document.getElementById('service-modal');
@@ -418,7 +418,7 @@ fetch('/assets/data/favorites_service.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** footer 자주찾는 메뉴 리스트 데이터 불러오기
-fetch('/assets/data/user_favorite_list.json')
+fetch('./assets/data/user_favorite_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('user-favorite-list');
@@ -460,7 +460,7 @@ fetch('/assets/data/user_favorite_list.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** footer 시민 리스트 데이터 불러오기
-fetch('/assets/data/user_citizen_list.json')
+fetch('./assets/data/user_citizen_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('user-citizen-list');
@@ -503,7 +503,7 @@ fetch('/assets/data/user_citizen_list.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** footer 사업자 리스트 데이터 불러오기
-fetch('/assets/data/user_business_list.json')
+fetch('./assets/data/user_business_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('user-business-list');
@@ -546,7 +546,7 @@ fetch('/assets/data/user_business_list.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** footer 관광객 리스트 데이터 불러오기
-fetch('/assets/data/user_tour_list.json')
+fetch('./assets/data/user_tour_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('user-tour-list');
@@ -589,7 +589,7 @@ fetch('/assets/data/user_tour_list.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** footer 유용한 정보 리스트 데이터 불러오기
-fetch('/assets/data/user_info_list.json')
+fetch('./assets/data/user_info_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('user-info-list');
@@ -632,7 +632,7 @@ fetch('/assets/data/user_info_list.json')
 .catch(error => console.error('Error loading JSON data:', error));
 
 // ** footer m favorite
-fetch('/assets/data/user_favorite_list.json')
+fetch('./assets/data/user_favorite_list.json')
   .then(response => response.json())
   .then(data => {
     const ulEl = document.getElementById('m-user-favorite-list');
@@ -688,7 +688,7 @@ fetch('/assets/data/user_favorite_list.json')
   .catch(error => console.error('Error loading JSON:', error));
 
 // footer m 시민 데이터 불러오기
-fetch('/assets/data/user_citizen_list.json')
+fetch('./assets/data/user_citizen_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('m-user-citizen-list');
@@ -744,7 +744,7 @@ fetch('/assets/data/user_citizen_list.json')
 .catch(error => console.error('Error loading JSON:', error));
 
 // footer m 사업자 데이터 불러오기
-fetch('/assets/data/user_business_list.json')
+fetch('./assets/data/user_business_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('m-user-business-list');
@@ -800,7 +800,7 @@ fetch('/assets/data/user_business_list.json')
 .catch(error => console.error('Error loading JSON:', error));
 
   // footer m 관광객 데이터 불러오기
-fetch('/assets/data/user_tour_list.json')
+fetch('./assets/data/user_tour_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('m-user-tour-list');
@@ -856,7 +856,7 @@ fetch('/assets/data/user_tour_list.json')
 .catch(error => console.error('Error loading JSON:', error));
 
 // footer m 유용한 정보 데이터 불러오기
-fetch('/assets/data/user_info_list.json')
+fetch('./assets/data/user_info_list.json')
 .then(response => response.json())
 .then(data => {
   const ulEl = document.getElementById('m-user-info-list');
