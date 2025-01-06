@@ -1,7 +1,7 @@
 // **json 데이터 불러오는 부분
 
 // ** .sc-news .swiper 데이터 불러오기
-fetch('/assets/data/news_slides.json')
+fetch('./assets/data/news_slides.json')
 .then(response => response.json())
 .then(data => {
   const swiperWrapper = document.getElementById('news-swiper');
