@@ -1,0 +1,94 @@
+[
+  {
+    "liClass" : "title",
+    "title" : "관광객",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "관광객"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "관광지",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "관광지"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "명품관광코스",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "명품관광코스"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "축제행사",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "축제행사"}
+    ]
+  },
+  {
+    "liClass" : "flex",
+    "title" : "숙박/음식",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "숙박"},
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "음식"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "뷰티인대구",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "뷰티인대구"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "의료관광",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "의료관광"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구시티투어",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구시티투어"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "관광안내지도신청",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "관광안내지도신청"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "공연전시정보",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "공연전시정보"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "걷기코스",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "걷기코스"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "자전거투어",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "자전거투어"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "공원",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "공원"}
+    ]
+  }
+]

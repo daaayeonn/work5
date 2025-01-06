@@ -1,0 +1,72 @@
+[
+  {
+    "liClass" : "title",
+    "title" : "유용한 정보",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "유용한 정보"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구현충시설",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구현충시설"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구독립유공자",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구독립유공자"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구인구활력정책",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구인구활력정책"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "쉬운우리말사전",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "쉬운우리말사전"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "자치경찰위원회",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "자치경찰위원회"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "보이스피싱주의",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "보이스피싱주의"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "사이버참배",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "사이버참배"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구 청년정책",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구 청년정책"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "국가상징알아보기",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "국가상징알아보기"}
+    ]
+  }
+]

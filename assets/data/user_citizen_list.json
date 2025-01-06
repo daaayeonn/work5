@@ -1,0 +1,119 @@
+[
+  {
+    "liClass" : "title",
+    "title" : "시민",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "새창", "text" : "시민"}
+    ]
+  },
+  {
+    "liClass" : "flex",
+    "title" : "공보/보도해명",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "공보"},
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "보도해명"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구지도포털",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구지도포털"}
+    ]
+  },
+  {
+    "liClass" : "flex",
+    "title" : "청년정책/창업허브",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "청년정책"},
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "창업허브"}
+    ]
+  },
+  {
+    "liClass" : "flex",
+    "title" : "버스노선 / 교통정보",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "버스노선"},
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "교통정보"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "실시간대기정보",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "실시간대기정보"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "재해 재난 시민행동요령",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "재해 재난 시민행동요령"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구소식당",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구소식당"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "부동산정보조회",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "부동산정보조회"}
+    ]
+  },
+  {
+    "liClass" : "flex",
+    "title" : "시험/취업",
+    "links" : [
+      {"href" : "#", "linkClass" : "", "linkTitle" : "", "text" : "시험"},
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "취업"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "자치법규(조례·규칙)",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "자치법규(조례·규칙)"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "민원서류발급",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "민원서류발급"}
+    ]
+  },
+  {
+    "liClass" : "flex",
+    "title" : "응급의료포털 / 복지로",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "응급의료포털"},
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "복지로"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구교육지원카드",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구교육지원카드"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "대구AI허브",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "대구AI허브"}
+    ]
+  },
+  {
+    "liClass" : "",
+    "title" : "일자리포털",
+    "links" : [
+      {"href" : "#", "linkClass" : "ic-new-window", "linkTitle" : "새창", "text" : "일자리포털"}
+    ]
+  }
+]

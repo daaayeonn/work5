@@ -1,0 +1,162 @@
+[
+  {
+    "image" : "./assets/images/ic_police.png",
+    "title" : "대구자치경찰위원회",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_communication.png",
+    "title" : "소통이음",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_civil_complaint.png",
+    "title" : "민원공모홈서비스",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_child_care.png",
+    "title" : "대구아동돌봄",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_job.png",
+    "title" : "대구일자리포털",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_blockchain.png",
+    "title" : "블록체인공동활용",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_child_meal_info.png",
+    "title" : "아동급식 정보마당",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_station_area_development.png",
+    "title" : "서대구역세권개발",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_aerial_photography.png",
+    "title" : "항공사진 통합플랫폼",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_daegu_map.png",
+    "title" : "대구지도포털",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_room.jpg",
+    "title" : "대구안방",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_excellent_department.png",
+    "title" : "시정추진 우수부서",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_people_in.png",
+    "title" : "피플人대구",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_security.png",
+    "title" : "안심하이소",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_citizen_health.png",
+    "title" : "시민건강 놀이터",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_data_hub.png",
+    "title" : "D-데이터허브",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_population_analysis.png",
+    "title" : "대구 서비스 인구분석",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_new_technology.png",
+    "title" : "신기술 플랫폼",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_regulatory_information.png",
+    "title" : "규제정보포털",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_parking_information.png",
+    "title" : "바른주차안내 문자서비스",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_regulatory_reform_newspaper.png",
+    "title" : "규제개혁 신문고",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_red_whistle.png",
+    "title" : "익명신고 (레드휘슬)",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_public_interest_tip.png",
+    "title" : "공익제보",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_self_governing_laws.png",
+    "title" : "자치법규 (조례·규칙)",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_monitor.png",
+    "title" : "대구시 통합모니터단",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_air_pollution.png",
+    "title" : "대기오염 문자알림 신청",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_music.png",
+    "title" : "대구 음악창의도시",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_liibrary.png",
+    "title" : "대구시청 작은도서관",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_webtoon.png",
+    "title" : "도시브랜드 웹툰",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_electric_vehicle_charging.png",
+    "title" : "대구 전기차 충전소",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_exit.png",
+    "title" : "비상대피/ 급수시설",
+    "link" : "#"
+  },
+  {
+    "image" : "./assets/images/ic_budget.png",
+    "title" : "주민참여예산",
+    "link" : "#"
+  }
+]

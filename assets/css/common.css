@@ -1,0 +1,343 @@
+body {
+  font-family: '맑은 고딕', '돋움', Dotum, '굴림', Gulim, Sans-serif;
+  font-size: 14px;
+  color: #444;
+}
+
+.blind {
+  position: absolute;
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+  clip: rect(0,0,0,0);
+}
+
+.inner {
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.egov {
+  background: #fff;
+  border-bottom: 1px solid #dcdcdc;
+}
+.egov.active {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+.egov .egov-text {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  line-height: 43px;
+}
+.egov .egov-text::before {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 15px;
+  background: url('../images/icon_web.png') no-repeat center / 100%;
+  margin-right: 4px;
+}
+
+.container-flex .inner {
+  display: flex;
+}
+
+.headline {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* select 공통 */
+.select-box-wrap {
+  position: relative;
+}
+.btn-select {
+  display: flex;
+  align-items: center;
+}
+.btn-select.arrow::after {
+  content: '';
+  margin-left: 10px;
+  border: 4px solid transparent;
+  border-bottom: 0;
+  border-top-color: #353d47;
+}
+.btn-select.lang::before {
+  content: '';
+  width: 22px;
+  height: 22px;
+  background: url('../images/icon_lang.png') no-repeat center / 100%;
+  margin-right: 6px;
+
+}
+.select-list {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  z-index: 10;
+}
+.select-list.on {
+  display: flex;
+  padding: 5px 0;
+  border: 1px solid #b6babe;
+}
+.select-list::before, .select-list::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -11px;
+  right: 16px;
+  border: 10px solid transparent;
+  border-top: 0;
+}
+.select-list::before {
+  right: 15px;
+  border-width: 11px;
+  border-bottom-color: #b6babe;
+}
+.select-list::after {
+  top: -10px;
+  border-bottom-color: #fff;
+}
+.select-list .select-item .select-link {
+  display: block;
+  padding: 4px 15px;
+  white-space: nowrap;
+}
+.select-list .select-item .select-link:hover {
+  background: #e0f0ff;
+}
+
+
+/* swiper 공통 */
+.swiper {
+  position: static;
+}
+.swiper .swiper-nav {
+  display: flex;
+  align-items: center;
+}
+.swiper .swiper-pagination {
+  display: flex;
+  align-items: center;
+  position: static;
+  width: auto;
+  font-size: 18px;
+  margin-right: 18px;
+}
+.swiper .swiper-pagination-current {
+  display: flex;
+  align-items: center;
+  color: #ef4b55;
+  font-weight: 600;
+}
+.swiper .swiper-pagination-current::after {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 1px;
+  background: #cbcbcb;
+  margin: 0 4px;
+}
+/* swiper button 공통 */
+.swiper [class *= "swiper-button"] {
+  position: static;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #abb6c0;
+  border-radius: 50%;
+  background: #fff;
+  margin: 0 4px;
+}
+.swiper [class *= "swiper-button"]::after {
+  content: '';
+  width: 6px;
+  height: 9px;
+  background: url('../images/sp_main.png') no-repeat;
+  background-position: 0 0;
+}
+/* swiper button big */
+.swiper [class *= "swiper-button-"].big {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  box-shadow: 3px 3px 8px rgba(0,0,0,.12);
+}
+.swiper [class *= "swiper-button-"].big::after {
+  width: 11px;
+  height: 20px;
+  background: url('../images/sp_main.png') no-repeat 100% 100%;
+  background-position: -10px 0;
+}
+.swiper .swiper-button-prev::after {
+  transform: rotate(180deg);
+}
+/* swiper play button */
+.swiper .swiper-button-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.swiper .swiper-button-play::after {
+  width: 6px;
+  height: 8px;
+  background: url('../images/sp_main.png') no-repeat;
+  background-position: 0 -11px;
+}
+.swiper .swiper-button-play.paused::after {
+  background-position: 2px -21px;
+}
+
+
+.container-flex.m01 .more-link {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  text-decoration: underline;
+}
+.container-flex.m01 .more-link::after {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background: url('../images/sp_main.png') no-repeat 100% 100%;
+  background-position: -10px -35px;
+  margin-left: 9px;
+}
+
+
+.group-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #112441;
+  z-index: 1000;
+}
+.group-modal .modal-inner {
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  max-width: 1478px;
+  max-height: 790px;
+  margin: auto;
+}
+.group-modal.on {
+  display: block;
+  visibility: visible;
+}
+.group-modal .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  margin-bottom: 50px;
+}
+.group-modal .top .text-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 25px;
+  letter-spacing: -1px;
+}
+.group-modal .top .text-wrap .title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 600;
+}
+.group-modal .top .text-wrap .desc {
+  font-size: 16px;
+}
+.group-modal .btn-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #fff;
+}
+.group-modal .btn-close::after {
+  content: '';
+  width: 22px;
+  height: 22px;
+  background: url('../images/sp_main.png') no-repeat 100% 100%;
+  background-position: -30px -38px;
+}
+
+
+
+/* 공통 반응형 */
+@media (max-width:1699px) {
+  .inner {
+    padding: 0 10px;
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .container-flex .inner {
+    flex-direction: column;
+  }
+}
+
+
+@media (max-width: 1023px) {
+  body {
+    font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue","Apple SD Gothic Neo",Arial,sans-serif;
+  }
+
+  .egov {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .headline {
+    font-size: 16px;
+  }
+
+  .swiper .swiper-pagination {
+    font-size: 14px;
+  }
+  .swiper [class *= "swiper-button"] {
+    width: 22px;
+    height: 22px;
+  }
+  .swiper [class *= "swiper-button-"].big {
+    width: 30px;
+    height: 30px;
+  }
+  .swiper [class *= "swiper-button"]::after {
+    background: url('../images/sp_main_m.png') no-repeat 0 0 / 400px 400px;
+  }
+  .swiper [class *= "swiper-button-"].big::after {
+    width: 8px;
+    height: 15px;
+    background: url('../images/sp_main_m.png') no-repeat 0 0 / 400px 400px;
+    background-position: -8px 0;
+  }
+  .swiper .swiper-button-play::after {
+    width: 5px;
+    height: 9px;
+    background-position: 0 -12px;
+  }
+  .swiper .swiper-button-play.paused::after {
+    background-position: 0 -23px;
+  }
+}
