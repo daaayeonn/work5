@@ -53,10 +53,12 @@
   color: #333;
   white-space: nowrap;
 }
-#header #gnb .gnb-item .gnb-link:hover {
+#header #gnb .gnb-item .gnb-link:hover, 
+#header #gnb .gnb-item .gnb-link:focus {
   color: #024da1;
 }
-#header #gnb .gnb-item .gnb-link.underline:hover {
+#header #gnb .gnb-item .gnb-link.underline:hover, 
+#header #gnb .gnb-item .gnb-link.underline:focus {
   text-decoration: underline;
 }
 #header #gnb .gnb-item .depth02-list {
@@ -150,7 +152,8 @@
 #header #gnb .depth02-item .depth02-link.ic-administration::before {
   background-position: -360px 0;
 }
-#header #gnb .gnb-item .depth02-link:hover {
+#header #gnb .gnb-item .depth02-link:hover,
+#header #gnb .gnb-item .depth02-link:focus  {
   text-decoration: underline;
   color: #024da1;
   background: #f4faff;
@@ -171,7 +174,8 @@
   padding: 5px 0;
   border: 1px solid #b6babe;
 }
-#header .util-area .select-link:hover {
+#header .util-area .select-link:hover,
+#header .util-area .select-link:focus {
   text-decoration: underline;
 }
 #header .util-area .search-wrap {

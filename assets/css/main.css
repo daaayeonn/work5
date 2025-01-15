@@ -234,10 +234,12 @@
   white-space: nowrap;
 }
 /* guide-link hover */
-.sc-guide .search-area .search-bottom .guide-link:hover .icon {
+.sc-guide .search-area .search-bottom .guide-link:hover .icon,
+.sc-guide .search-area .search-bottom .guide-link:focus .icon {
   transform: translateY(-5px);
 }
-.sc-guide .search-area .search-bottom .guide-link:hover .guide-text {
+.sc-guide .search-area .search-bottom .guide-link:hover .guide-text,
+.sc-guide .search-area .search-bottom .guide-link:focus .guide-text {
   text-decoration: underline;
 }
 /* 대구시장 */
@@ -272,7 +274,8 @@
 .sc-guide .guide-right .mayor-area .link-wrap .mayor-link:first-child {
   border-right: 1px solid #d23a43;
 }
-.sc-guide .guide-right .mayor-area .link-wrap .mayor-link:hover {
+.sc-guide .guide-right .mayor-area .link-wrap .mayor-link:hover,
+.sc-guide .guide-right .mayor-area .link-wrap .mayor-link:focus {
   background: #d23a43;
   text-decoration: underline;
 }
@@ -487,7 +490,8 @@
   background: #ef4b55;
   border-color: #ef4b55;
 }
-.sc-quick-tab .group-header .tab-item.on .tab-link:hover {
+.sc-quick-tab .group-header .tab-item.on .tab-link:hover,
+.sc-quick-tab .group-header .tab-item.on .tab-link:focus {
   text-decoration: none;
   background: #d23a43;
   border-color: #d23a43;
@@ -500,7 +504,8 @@
   background-position: -85px 0;
   margin-right: 5px;
 }
-.sc-quick-tab .group-header .tab-link:hover {
+.sc-quick-tab .group-header .tab-link:hover,
+.sc-quick-tab .group-header .tab-link:focus {
   text-decoration: underline;
 }
 .sc-quick-tab .group-content .content-list {
@@ -600,13 +605,16 @@
   font-size: 17px;
   letter-spacing: -1px;
 }
-.sc-quick-tab .group-content .content-link:hover {
+.sc-quick-tab .group-content .content-link:hover,
+.sc-quick-tab .group-content .content-link:focus {
   background: #ffecee;
 }
-.sc-quick-tab .group-content .content-link:hover .icon {
+.sc-quick-tab .group-content .content-link:hover .icon,
+.sc-quick-tab .group-content .content-link:focus .icon {
   transform: translateY(-5px);
 }
-.sc-quick-tab .group-content .content-link:hover  .title {
+.sc-quick-tab .group-content .content-link:hover .title,
+.sc-quick-tab .group-content .content-link:focus .title {
   text-decoration: underline;
 }
 
@@ -662,7 +670,8 @@
   border-radius: 50%;
   background: #ef4b55;
 }
-.sc-now .group-tab .top .more-link:hover {
+.sc-now .group-tab .top .more-link:hover,
+.sc-now .group-tab .top .more-link:focus {
   background: #d23a43;
 }
 .sc-now .group-tab .top .more-link::after {
@@ -739,10 +748,12 @@
   background: url('../images/sp_main.png') no-repeat 100% 100%;
   background-position: -115px 0;
 }
-.sc-now .group-tab .tab-list .tab-link:hover {
+.sc-now .group-tab .tab-list .tab-link:hover,
+.sc-now .group-tab .tab-list .tab-link:focus {
   transform: translateX(5px);
 }
-.sc-now .group-tab .tab-item.active .tab-link:hover {
+.sc-now .group-tab .tab-item.active .tab-link:hover,
+.sc-now .group-tab .tab-item.active .tab-link:focus {
   transform: translateX(0);
 }
 .sc-now .group-tab .tab-link .now-tab-li-br {
@@ -800,7 +811,8 @@
   letter-spacing: -1px;
   margin-top: 20px;
 }
-.sc-now .group-slide .swiper .now-link:hover .title {
+.sc-now .group-slide .swiper .now-link:hover .title,
+.sc-now .group-slide .swiper .now-link:focus .title {
   text-decoration: underline;
 }
 .sc-now .group-slide .swiper .now-link .desc {
@@ -898,7 +910,8 @@
 .sc-sns .group-content .content-area .top .site-home-link .point-blog {
   color: #008837;
 }
-.sc-sns .group-content .content-area .top .site-home-link:hover {
+.sc-sns .group-content .content-area .top .site-home-link:hover,
+.sc-sns .group-content .content-area .top .site-home-link:focus {
   text-decoration: underline;
 }
 .sc-sns .group-content .content-area .top .site-content-link .thumb {
@@ -920,7 +933,8 @@
 .sc-sns .group-content .content-area .top .site-content-link .thumb-img {
   transition: all .3s;
 } 
-.sc-sns .group-content .content-area .top .site-content-link:hover .thumb-img {
+.sc-sns .group-content .content-area .top .site-content-link:hover .thumb-img,
+.sc-sns .group-content .content-area .top .site-content-link:focus .thumb-img {
   transform: scale(1.05);
 }
 .sc-sns .group-content .content-area .bottom {
@@ -1011,7 +1025,8 @@
   border-radius: 50%;
   transition: all .3s;
 }
-.sc-service .swiper .swiper-slide .service-link:hover  .thumb {
+.sc-service .swiper .swiper-slide .service-link:hover .thumb,
+.sc-service .swiper .swiper-slide .service-link:focus .thumb {
   transform: translateY(-5px);
 }
 .sc-service .swiper .swiper-slide .service-link .service-img {
@@ -1024,7 +1039,8 @@
 .sc-service .swiper .swiper-slide .service-link  .title {
   letter-spacing: -1px;
 }
-.sc-service .swiper .swiper-slide .service-link:hover  .title {
+.sc-service .swiper .swiper-slide .service-link:hover .title,
+.sc-service .swiper .swiper-slide .service-link:focus .title {
   text-decoration: underline;
 }
 .sc-service .swiper [class *= "swiper-button-"] {
@@ -1100,13 +1116,16 @@
   letter-spacing: -2.5px;
   white-space: nowrap;
 }
-.sc-service .group-modal .content .service-link:hover {
+.sc-service .group-modal .content .service-link:hover,
+.sc-service .group-modal .content .service-link:focus {
   background: #ffecee;
 }
-.sc-service .group-modal .content .service-link:hover .ic-wrap {
+.sc-service .group-modal .content .service-link:hover .ic-wrap,
+.sc-service .group-modal .content .service-link:focus .ic-wrap {
   transform: translateY(-5px);
 }
-.sc-service .group-modal .content .service-link:hover .title {
+.sc-service .group-modal .content .service-link:hover .title,
+.sc-service .group-modal .content .service-link:focus .title {
   text-decoration: underline;
 }
 
@@ -1676,7 +1695,8 @@
   .sc-now .group-tab .tab-item.active .tab-link::after {
     display: none;
   }
-  .sc-now .group-tab .tab-item .tab-link:hover {
+  .sc-now .group-tab .tab-item .tab-link:hover,
+  .sc-now .group-tab .tab-item .tab-link:focus {
     transform: translateX(0);
   }
   .sc-now .group-tab .tab-link .now-tab-li-br {
@@ -1714,7 +1734,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .sc-now .group-mobile .now-m-link:hover .title {
+  .sc-now .group-mobile .now-m-link:hover .title,
+  .sc-now .group-mobile .now-m-link:focus .title {
     text-decoration: underline;
   }
 

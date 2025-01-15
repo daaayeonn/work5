@@ -32,6 +32,7 @@ fetch('./assets/data/news_slides.json')
     loop: true,
     slidesPerView: 1,
     speed: 1500,
+    a11y: false, 
     autoplay: {
       delay: 4000,
     },
@@ -975,8 +976,7 @@ $('#header .util-area .search-wrap .btn-close').on('click', function() {
 $('#header .all-menu-link').on('click', function(e) {
   e.preventDefault();
 
-  // max-width 767px 조건 확인
-  if (window.matchMedia("(max-width: 767px)").matches) {
+  if (mMediaQuery.matches) {
     $('body').css({ 'overflow': 'hidden' });
     $('#header .m-gnb-wrap').addClass('on');
   }
@@ -1062,10 +1062,13 @@ const weatherDetailSwiper = new Swiper('.sc-guide .weather-detail-box .swiper', 
 $('.sc-guide .weather-wrap .btn-select').on('mousedown', function() {
   $(this).siblings().toggleClass('on');
 })
-$('.sc-guide .weather-wrap .btn-select').on('focusin', function() {
-  $(this).siblings().addClass('on');
+// enter 키 눌렀을 때 on 클래스 적용
+$('.sc-guide .weather-wrap .btn-select').on('keydown', function(e) { 
+  if (e.key === 'Enter' || e.which === 13) {
+    $(this).siblings().addClass('on');
+  }
 });
-
+// focusout 시 on 클래스 제거
 $('.sc-guide .weather-wrap .select-weather').on('focusout', function (e) {
   // 포커스가 ul 내부의 다른 요소로 이동한 경우를 제외
   if (!$(this).has(e.relatedTarget).length) {
