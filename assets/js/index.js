@@ -47,6 +47,7 @@ fetch('./assets/data/news_slides.json')
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+
     breakpoints: {
       1100: {
         slidesPerView: 2,
@@ -920,17 +921,17 @@ const mMediaQuery = window.matchMedia('(max-width: 767px)');
 
 // ** header 영역 **
 // header 고정
-$(window).on('scroll', function() {
-  let scrollTop = $(this).scrollTop();
+// $(window).on('scroll', function() {
+//   let scrollTop = $(this).scrollTop();
 
-  if (scrollTop > 0) {
-    $('.egov').addClass('active');
-    $('#header').addClass('active');
-  } else {
-    $('.egov').removeClass('active');
-    $('#header').removeClass('active');
-  }
-});
+//   if (scrollTop > 0) {
+//     $('.egov').addClass('active');
+//     $('#header').addClass('active');
+//   } else {
+//     $('.egov').removeClass('active');
+//     $('#header').removeClass('active');
+//   }
+// });
 
 // gnb
 $('#header #gnb').on('mouseenter focusin', function() {
@@ -939,9 +940,18 @@ $('#header #gnb').on('mouseenter focusin', function() {
   $('#header').removeClass('on');
 });
 // select
-$('#header .util-area .btn-select').on('click', function(e) {
+$('#header .util-area .btn-select').on('mousedown', function(e) {
   e.stopPropagation();
   $(this).siblings().toggleClass('on').parent().siblings().find('.select-list').removeClass('on');
+})
+$('#header .util-area .btn-select').on('focusin', function(e) {
+  e.stopPropagation();
+  $(this).siblings().addClass('on').parent().siblings().find('.select-list').removeClass('on');
+})
+$('#header .util-area .select-list').on('focusout', function(e) {
+  if (!$(this).has(e.relatedTarget).length) {
+    $(this).removeClass('on');
+  }
 })
 $(document).on('click', function(e) {
   if (!$(e.target).closest('#header .util-area .btn-select').length) {
@@ -965,9 +975,12 @@ $('#header .util-area .search-wrap .btn-close').on('click', function() {
 $('#header .all-menu-link').on('click', function(e) {
   e.preventDefault();
 
-  $('body').css({'overflow':'hidden'});
-  $('#header .m-gnb-wrap').addClass('on');
-})
+  // max-width 767px 조건 확인
+  if (window.matchMedia("(max-width: 767px)").matches) {
+    $('body').css({ 'overflow': 'hidden' });
+    $('#header .m-gnb-wrap').addClass('on');
+  }
+});
 // 모바일 메뉴 닫기
 $('#header .m-gnb-wrap .m-gnb-top .btn-close').on('click', function(e) {
   e.preventDefault();
@@ -1046,12 +1059,19 @@ const weatherDetailSwiper = new Swiper('.sc-guide .weather-detail-box .swiper', 
 });
 
 // 날씨 select-list
-$('.sc-guide .weather-wrap .btn-select').on('click focusin', function() {
+$('.sc-guide .weather-wrap .btn-select').on('mousedown', function() {
   $(this).siblings().toggleClass('on');
 })
-$('.sc-guide .weather-wrap .select-weather').on('focusout', function() {
-  $(this).removeClass('on');
-})
+$('.sc-guide .weather-wrap .btn-select').on('focusin', function() {
+  $(this).siblings().addClass('on');
+});
+
+$('.sc-guide .weather-wrap .select-weather').on('focusout', function (e) {
+  // 포커스가 ul 내부의 다른 요소로 이동한 경우를 제외
+  if (!$(this).has(e.relatedTarget).length) {
+    $(this).removeClass('on');
+  }
+});
 
 $(document).on('click', function(e) {
   if (!$(e.target).closest('.sc-guide .weather-wrap .btn-select').length) {
@@ -1161,26 +1181,50 @@ $('.sc-service .group-modal .btn-close').on('click', function() {
 
 // ** footer 영역 **
 // select btn 클릭이벤트
-$('#footer .top .btn-select-basic').on('click', function() {
+$('#footer .top .btn-select-basic').on('mousedown', function() {
   $(this).toggleClass('on');
   $(this).siblings().toggleClass('on');
 })
+$('#footer .top .btn-select-basic').on('focusin', function() {
+  $(this).addClass('on');
+  $(this).siblings().addClass('on');
+})
+$('#footer .top .select-list').on('focusout', function(e) {
+  if (!$(this).has(e.relatedTarget).length) {
+    $(this).removeClass('on');
+    $(this).siblings().removeClass('on');
+  }
+})
 
-$('#footer .top .btn-select-point').on('click focusin', function() {
+$('#footer .top .btn-select-point').on('mousedown', function() {
   if (pcMediaQuery.matches) {
     $(this).toggleClass('on');
     $('#footer .top .user-menu-wrap').toggleClass('on');
   }
 })
+$('#footer .top .btn-select-point').on('focusin', function() {
+  if (pcMediaQuery.matches) {
+    $(this).addClass('on');
+    $('#footer .top .user-menu-wrap').addClass('on');
+  }
+})
+$('#footer .top .user-menu-wrap').on('focusout', function(e) {
+  if (pcMediaQuery.matches) {
+    if (!$(this).has(e.relatedTarget).length) {
+      $(this).removeClass('on');
+      $('#footer .top .btn-select-point').removeClass('on')
+    }
+  }
+})
 
 // 버튼 클릭 이벤트
-$('#footer .top .btn-select-point').on('click focusin', function() {
+$('#footer .top .btn-select-point').on('click', function() {
   if (mMediaQuery.matches) {
     $('body').css({'overflow':'hidden'});
     $('#footer .m-user-menu').addClass('on');
   }
 });
-$('#footer .m-user-menu .btn-close').on('click focusin', function() {
+$('#footer .m-user-menu .btn-close').on('click', function() {
   if (mMediaQuery.matches) {
     $('body').css({'overflow':'visible'});
     $('#footer .m-user-menu').removeClass('on');
