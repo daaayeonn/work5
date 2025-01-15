@@ -921,19 +921,6 @@ const mMediaQuery = window.matchMedia('(max-width: 767px)');
 
 
 // ** header 영역 **
-// header 고정
-// $(window).on('scroll', function() {
-//   let scrollTop = $(this).scrollTop();
-
-//   if (scrollTop > 0) {
-//     $('.egov').addClass('active');
-//     $('#header').addClass('active');
-//   } else {
-//     $('.egov').removeClass('active');
-//     $('#header').removeClass('active');
-//   }
-// });
-
 // gnb
 $('#header #gnb').on('mouseenter focusin', function() {
   $('#header').addClass('on');
@@ -1099,15 +1086,6 @@ $('.sc-notice .group-modal .btn-close').on('click', function() {
 
 // ** .sc-quick-tab 영역 **
 // .sc-quick-tab 탭메뉴
-// $('.sc-quick-tab .tab-list .tab-item').on('click', function (e) {
-//   e.preventDefault();
-
-//   tabName = $(this).children().data('tab');
-
-//   $(this).addClass('on').siblings().removeClass('on');
-//   $('#'+tabName).addClass('on').siblings().removeClass('on');
-// })
-
 $('.sc-quick-tab .tab-list .tab-item').on('click keydown', function (e) {
   if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.which === 13))) {
     e.preventDefault();
