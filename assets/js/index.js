@@ -201,7 +201,7 @@ fetch('./assets/data/now_notice_slides.json')
   const nowNoticeSwiper = new Swiper('.sc-now .now-notice-swiper-area .swiper', {
     loop: true,
     slidesPerView: 4,
-    // spaceBetween: 20,
+    a11y: false,
     autoplay: {
       delay: 4000,
     },
@@ -254,6 +254,7 @@ fetch('./assets/data/now_test_slides.json')
     loop: true,
     slidesPerView: 4,
     spaceBetween: 20,
+    a11y: false,
     autoplay: {
       delay: 4000,
     },
@@ -1101,19 +1102,22 @@ $('.sc-quick-tab .tab-list .tab-item').on('click keydown', function (e) {
 
 // ** .sc-now 대구는 지금 영역 **
 // 탭메뉴
-$('.sc-now .group-tab .tab-list .tab-item').on('click focusin', function(e) {
-  e.preventDefault();
-  tabName = $(this).children().data('tab');
-  mTabName = $(this).children().data('mo');
+$('.sc-now .group-tab .tab-list .tab-item').on('click keydown', function(e) {
+  if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.which === 13))) {
+    e.preventDefault();
 
-  if (pcMediaQuery.matches) {
-    $(this).addClass('active').siblings().removeClass('active');
-    $('#'+tabName).addClass('active').siblings().removeClass('active');
-  }
+    tabName = $(this).children().data('tab');
+    mTabName = $(this).children().data('mo');
 
-  if (mMediaQuery.matches) {
-    $(this).addClass('active').siblings().removeClass('active');
-    $('#'+mTabName).addClass('active').siblings().removeClass('active');
+    if (pcMediaQuery.matches) {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('#'+tabName).addClass('active').siblings().removeClass('active');
+    }
+  
+    if (mMediaQuery.matches) {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('#'+mTabName).addClass('active').siblings().removeClass('active');
+    }
   }
 })
 // ** .sc-now 대구는 지금 영역 끝 **
