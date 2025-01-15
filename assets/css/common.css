@@ -18,14 +18,18 @@ body {
 }
 
 .egov {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
   background: #fff;
   border-bottom: 1px solid #dcdcdc;
 }
-.egov.active {
+/* .egov.active {
   position: fixed;
   width: 100%;
   z-index: 999;
-}
+} */
 .egov .egov-text {
   display: flex;
   align-items: center;

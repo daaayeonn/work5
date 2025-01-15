@@ -32,7 +32,7 @@ fetch('./assets/data/news_slides.json')
     loop: true,
     slidesPerView: 1,
     speed: 1500,
-    a11y: false, 
+    a11y: true, 
     autoplay: {
       delay: 4000,
     },
@@ -346,9 +346,9 @@ fetch('./assets/data/favorites_service.json')
 
   const serviceSwiper = new Swiper('.sc-service .swiper', {
     loop: true,
-    slidesPerView: 2,
+    slidesPerView: 4,
     grid: {
-      rows: 1
+      rows: 2
     },
     autoplay: {
       delay: 4000,
@@ -1099,14 +1099,25 @@ $('.sc-notice .group-modal .btn-close').on('click', function() {
 
 // ** .sc-quick-tab 영역 **
 // .sc-quick-tab 탭메뉴
-$('.sc-quick-tab .tab-list .tab-item').on('click focusin', function (e) {
-  e.preventDefault();
+// $('.sc-quick-tab .tab-list .tab-item').on('click', function (e) {
+//   e.preventDefault();
 
-  tabName = $(this).children().data('tab');
+//   tabName = $(this).children().data('tab');
 
-  $(this).addClass('on').siblings().removeClass('on');
-  $('#'+tabName).addClass('on').siblings().removeClass('on');
-})
+//   $(this).addClass('on').siblings().removeClass('on');
+//   $('#'+tabName).addClass('on').siblings().removeClass('on');
+// })
+
+$('.sc-quick-tab .tab-list .tab-item').on('click keydown', function (e) {
+  if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.which === 13))) {
+    e.preventDefault();
+
+    const tabName = $(this).children().data('tab');
+
+    $(this).addClass('on').siblings().removeClass('on');
+    $('#' + tabName).addClass('on').siblings().removeClass('on');
+  }
+});
 // ** .sc-quick-tab 영역 끝 **
 
 

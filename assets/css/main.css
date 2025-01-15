@@ -1,3 +1,6 @@
+#container {
+  padding-top: 144px;
+}
 .sc-guide .inner {
   display: flex;
   gap: 30px;
@@ -1138,7 +1141,7 @@
 /* 반응형 */
 @media (max-width:1699px) {
   #container {
-    padding-top: 60px;
+    padding-top: 204px;
   }
 
   .sc-news .group-content .news-swiper-wrap .news-link {
