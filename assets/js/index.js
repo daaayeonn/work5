@@ -1,4 +1,4 @@
-// **json 데이터 불러오는 부분
+// ❗ json 데이터 불러오는 부분
 
 // ** .sc-news .swiper 데이터 불러오기
 fetch('./assets/data/news_slides.json')
@@ -15,7 +15,7 @@ fetch('./assets/data/news_slides.json')
   slideElement.innerHTML = `
     <a href="${slide.link}" title="새창" class="news-link">
       <div class="thumb">
-        <img src="${slide.image}" alt="${slide.title}" class="news-img">
+        <img src="${slide.image}" alt class="news-img">
       </div>
       <div class="text-wrap">
         <strong class="title">${slide.title}</strong>
@@ -27,14 +27,18 @@ fetch('./assets/data/news_slides.json')
     // 생성된 슬라이드를 swiper-wrapper에 추가
     swiperWrapper.appendChild(slideElement);
   });
+  
 
   const newsSwiper = new Swiper('.sc-news .swiper', {
     loop: true,
     slidesPerView: 1,
     speed: 1500,
-    a11y: true, 
     autoplay: {
       delay: 4000,
+      disableOnInteraction: false,
+    },
+    keyboard: {
+      enabled: false,
     },
     pagination: {
       el: '.sc-news .swiper .swiper-pagination',
@@ -48,7 +52,10 @@ fetch('./assets/data/news_slides.json')
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-
+    a11y: {
+      prevSlideMessage: '이전 보기',
+      nextSlideMessage: '다음 보기',
+    },
     breakpoints: {
       1100: {
         slidesPerView: 2,
@@ -59,21 +66,43 @@ fetch('./assets/data/news_slides.json')
       360: {
         slidesPerView: 2,
       }
+    },
+    on: {
+      init: function () {
+        updateSlideAccessibility(this); // 초기화 시 설정
+      },
+      slideChange: function () {
+        setTimeout(() => {
+          if (!this.allowSlideNext && !this.allowSlidePrev) {
+            this.slideTo(this.realIndex, 0, false);
+          }
+          updateSlideAccessibility(this);
+        }, 0); // 0ms 지연으로 이벤트 루프에서 실행
+      },
+      slideChangeTransitionEnd: function () {
+        updateSlideAccessibility(this); // 슬라이드 변경 시 업데이트
+      },
+    }
+  });
+  // 재생버튼
+  let isPlaying = true;
+  $('.sc-news .swiper .swiper-button-play').on('click keydown', function(e) {
+    if (e.key === 'Enter' || e.which === 13 || e.type === "click") {
+
+      if (isPlaying) {
+        newsSwiper.autoplay.stop();
+        $(this).addClass('paused');
+        $(this).children('span').text('정지');
+      } else {
+        newsSwiper.autoplay.start();
+        $(this).removeClass('paused');
+        $(this).children('span').text('재생');
+      }
+      isPlaying = !isPlaying;
     }
   });
 
-  // 재생버튼
-  let isPlaying = true;
-  $('.sc-news .swiper .swiper-button-play').on('click', function() {
-    if (isPlaying) {
-      newsSwiper.autoplay.stop();
-      $(this).addClass('paused');
-    } else {
-      newsSwiper.autoplay.start();
-      $(this).removeClass('paused');
-    }
-    isPlaying = !isPlaying;
-  });
+  
 })
 .catch(error => console.error('Error loading JSON data:', error));
 
@@ -89,9 +118,7 @@ fetch('./assets/data/notice_slides.json')
 
     slideElement.innerHTML = `
       <a href="${slide.link}" title="새창" class="notice-link">
-        <div class="thumb">
-          <img src="${slide.image}" alt="${slide.title}" class="notice-img">
-        </div>
+        <img src="${slide.image}" alt="${slide.title}" class="notice-img">
       </a>
     `;
 
@@ -100,8 +127,8 @@ fetch('./assets/data/notice_slides.json')
 
   const noticeSwiper = new Swiper('.sc-notice .swiper', {
     loop: true,
-    slidesPerView: 1,
-    slidesPerGroup: 1,
+    slidesPerView: 2,
+    slidesPerGroup: 2,
     autoplay: {
       delay: 4000,
     },
@@ -118,9 +145,12 @@ fetch('./assets/data/notice_slides.json')
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+    a11y: {
+      prevSlideMessage: '이전 보기',
+      nextSlideMessage: '다음 보기',
+      slideLabelMessage: '',
+    },
     breakpoints: {
-     
-     
       360: {
         slidesPerView: 2,
         slidesPerGroup: 2,
@@ -133,45 +163,82 @@ fetch('./assets/data/notice_slides.json')
         slidesPerView: 2,
         slidesPerGroup: 2,
       },
+    },
+    on: {
+      init: function () {
+        updateSlideAccessibility(this);
+      },
+      slideChange: function () {
+        setTimeout(() => {
+          if (!this.allowSlideNext && !this.allowSlidePrev) {
+            this.slideTo(this.realIndex, 0, false);
+          }
+          updateSlideAccessibility(this);
+        }, 0)
+      },
+      slideChangeTransitionEnd: function () {
+        updateSlideAccessibility(this);
+      },
     }
   });
   // 재생버튼
   let isPlaying = true;
-  $('.sc-notice .swiper .swiper-button-play').on('click', function() {
-    if (isPlaying) {
-      noticeSwiper.autoplay.stop(); // 자동 재생 멈춤
-      $(this).addClass('paused');
-    } else {
-      noticeSwiper.autoplay.start(); // 자동 재생 시작
-      $(this).removeClass('paused');
+  $('.sc-notice .swiper .swiper-button-play').on('click', function(e) {
+    if (e.key === 'Enter' || e.which === 13 || e.type === "click") {
+
+      if (isPlaying) {
+        noticeSwiper.autoplay.stop();
+        $(this).addClass('paused');
+        $(this).children('span').text('정지');
+      } else {
+        noticeSwiper.autoplay.start();
+        $(this).removeClass('paused');
+        $(this).children('span').text('재생');
+      }
+      isPlaying = !isPlaying;
     }
-    isPlaying = !isPlaying;
+  });
+
+  document.querySelectorAll('.swiper-slide a').forEach(link => {
+    const img = link.querySelector('img');  
+    if (img && img.alt) {
+      link.setAttribute('aria-label', img.alt); // a 태그에 img의 alt 적용 스크린리더에서 읽히게
+    }
   });
 })
 .catch(error => console.error('Error loading JSON data:', error));
 
 // notice 모달 팝업
-fetch('./assets/data/notice_slides.json')
-.then(response => response.json())
-.then(data => {
-  const noticeModal = document.getElementById('notice-modal');
+document.addEventListener("DOMContentLoaded", async () => {
+  const modalCt = document.querySelector(".sc-notice .modal .content-list");
+  const jsonURL = "../assets/data/notice_slides.json";
 
-  data.forEach(modal => {
-    const modalEl = document.createElement('a');
-    modalEl.classList.add('notice-link');
-    modalEl.href = modal.link;
-    modalEl.title = "새창";
+  try {
+    const response = await fetch(jsonURL);
+    if (!response.ok) throw new Error("알림존 modal: 데이터를 가져오는데 실패했습니다.");
+    const data = await response.json();
 
-    modalEl.innerHTML = `
-      <div class="thumb">
-        <img src="${modal.image}" alt="${modal.title}" class="thumb-img">
-      </div>
-    `;
+    if (!Array.isArray(data) || data.length === 0) throw new Error("알림존 modal: 유효한 데이터가 없습니다.");
 
-    noticeModal.appendChild(modalEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
+    modalCt.innerHTML = data.map(item => `
+      <li class="content-item">
+        <a href="${item.link}" class="notice-link" title="새창">
+          <img src="${item.image}" alt="${item.title}">
+        </a>
+      </li>
+    `).join("");
+
+    document.querySelectorAll('.sc-notice .modal .content-list .notice-link').forEach(link => {
+      const img = link.querySelector('img');  
+      if (img && img.alt) {
+        link.setAttribute('aria-label', img.alt);
+      }
+    });
+  } catch (error) {
+    console.error("🚨 오류 발생:", error.message);
+    modalCt.innerHTML = "<p>슬라이드를 불러올 수 없습니다.</p>";
+  }
+});
 
 // ** 대구는 지금 공지사항 데이터 불러오기
 fetch('./assets/data/now_notice_slides.json')
@@ -198,30 +265,58 @@ fetch('./assets/data/now_notice_slides.json')
     swiperWrapper.appendChild(slideElement);
   });
 
-  const nowNoticeSwiper = new Swiper('.sc-now .now-notice-swiper-area .swiper', {
-    loop: true,
+  const nowNoticeSwiper = new Swiper('.sc-now .now-notice-swiper-wrap .swiper', {
+    loop: false,
     slidesPerView: 4,
-    a11y: false,
     autoplay: {
       delay: 4000,
     },
     speed: 1500,
+    keyboard: {
+      enabled: false,
+    },
     navigation: {
       nextEl: '.sc-now .now-notice-swiper-area .swiper-button-next',
       prevEl: '.sc-now .now-notice-swiper-area .swiper-button-prev',
     },
+    a11y: {
+      prevSlideMessage: '이전 보기',
+      nextSlideMessage: '다음 보기',
+    },
     breakpoints: {
-      1440: {
-        slidesPerView: 4,
+      767: {
+        slidesPerView: 2,
       },
       1024: {
         slidesPerView: 3,
       },
-      767: {
-        slidesPerView: 2,
-      }
+      1440: {
+        slidesPerView: 4,
+      },
+    },
+    on: {
+      init: function () {
+        updateSlideAccessibility(this);
+      },
+      slideChange: function () {
+        setTimeout(() => {
+          if (!this.allowSlideNext && !this.allowSlidePrev) {
+            this.slideTo(this.realIndex, 0, false);
+          }
+          updateSlideAccessibility(this);
+        }, 0);
+      },
+      slideChangeTransitionEnd: function () {
+        updateSlideAccessibility(this);
+      },
     }
   });
+
+  // nowNoticeSwiper.on('slideChange', function () {
+  //   document.querySelectorAll('.swiper-slide[aria-hidden="true"] a').forEach(link => {
+  //       link.setAttribute('tabindex', '-1'); // 비활성화된 슬라이드 내 링크 비활성화
+  //   });
+  // });
 })
 .catch(error => console.error('Error loading JSON data:', error));
 
@@ -250,11 +345,10 @@ fetch('./assets/data/now_test_slides.json')
     swiperWrapper.appendChild(slideElement);
   });
 
-  const nowTestSwiper = new Swiper('.sc-now .now-test-swiper-area .swiper', {
-    loop: true,
+  const nowTestSwiper = new Swiper('.sc-now .now-test-swiper-wrap .swiper', {
+    loop: false,
     slidesPerView: 4,
     spaceBetween: 20,
-    a11y: false,
     autoplay: {
       delay: 4000,
     },
@@ -263,6 +357,26 @@ fetch('./assets/data/now_test_slides.json')
       nextEl: '.sc-now .now-test-swiper-area .swiper-button-next',
       prevEl: '.sc-now .now-test-swiper-area .swiper-button-prev',
     },
+    a11y: {
+      prevSlideMessage: '이전 보기',
+      nextSlideMessage: '다음 보기',
+    },
+    on: {
+      init: function () {
+        updateSlideAccessibility(this);
+      },
+      slideChange: function () {
+        setTimeout(() => {
+          if (!this.allowSlideNext && !this.allowSlidePrev) {
+            this.slideTo(this.realIndex, 0, false);
+          }
+          updateSlideAccessibility(this);
+        }, 0);
+      },
+      slideChangeTransitionEnd: function () {
+        updateSlideAccessibility(this);
+      },
+    }
   });
 })
 .catch(error => console.error('Error loading JSON data:', error));
@@ -324,604 +438,147 @@ fetch('./assets/data/now_test_slides.json')
 });
 
 // ** .sc-service swiper (대구시 운영 서비스) 데이터 불러오기
-fetch('./assets/data/favorites_service.json')
-.then(response => response.json())
-.then(data => {
-  const swiperWrapper = document.getElementById('service-swiper');
+document.addEventListener("DOMContentLoaded", async () => {
+  const swiperWrapper = document.querySelector(".sc-service .swiper-wrapper");
+  const jsonURL = "../assets/data/service.json";
 
-  data.forEach(slide => {
-    const slideElement = document.createElement('div');
-    slideElement.classList.add('swiper-slide');
+  try {
+    // 🔹 JSON 데이터 불러오기
+    const response = await fetch(jsonURL);
+    if (!response.ok) throw new Error("대구시 운영서비스: 데이터를 가져오는데 실패했습니다.");
+    const data = await response.json();
 
-    slideElement.innerHTML = `
-      <a href="${slide.link}" title="새창" class="service-link">
-        <div class="thumb">
-          <img src="${slide.image}" alt="${slide.title}" class="service-img">
-        </div>
-        <span class="title">${slide.title}</span>
-      </a>
-    `;
+    // 🔹 데이터가 올바르게 들어왔는지 확인
+    if (!Array.isArray(data) || data.length === 0) throw new Error("대구시 운영서비스: 유효한 데이터가 없습니다.");
 
-    swiperWrapper.appendChild(slideElement);
-  });
-
-  const serviceSwiper = new Swiper('.sc-service .swiper', {
-    loop: true,
-    slidesPerView: 4,
-    grid: {
-      rows: 2
-    },
-    autoplay: {
-      delay: 4000,
-    },
-    speed: 1000,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      360: {
-         grid: {
-          rows: 1
-        },
-        slidesPerView: 4,
-      },
-      767: {
-         grid: {
-          rows: 1
-        },
-        slidesPerView: 6,
-      },
-      1100: {
-        slidesPerView: 4,
-        grid: {
-          rows: 2
-        },
-        loopAdditionalSlides: 3,
-      },
-    },
-  });
-  // 재생버튼
-  let isPlaying = true;
-  $('.sc-service .swiper .swiper-button-play').on('click', function() {
-    if (isPlaying) {
-      serviceSwiper.autoplay.stop();
-      $(this).addClass('paused');
-    } else {
-      serviceSwiper.autoplay.start();
-      $(this).removeClass('paused');
-    }
-    isPlaying = !isPlaying;
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** .sc-service 모달팝업 데이터 불러오기
-fetch('./assets/data/favorites_service.json')
-.then(response => response.json())
-.then(data => {
-  const serviceModal = document.getElementById('service-modal');
-
-  data.forEach(modal => {
-    const modalEl = document.createElement('a');
-    modalEl.classList.add('service-link');
-    modalEl.href = modal.link;
-    modalEl.title = "새창";
-
-    modalEl.innerHTML = `
-      <div class="ic-wrap">
-        <img src="${modal.image}" alt="${modal.title}" class="icon-img">
+    // 🔹 JSON 데이터로 슬라이드 생성
+    swiperWrapper.innerHTML = data.map(item => `
+      <div class="swiper-slide">
+        <a href="${item.link}" class="service-link" title=""새창>
+          <div class="img-wrap">
+            <img src="${item.src}" alt>
+          </div>
+          <span class="title">${item.title}</span>
+        </a>
       </div>
-      <span class="title">${modal.title}</span>
-    `;
+    `).join("");
 
-    serviceModal.appendChild(modalEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** footer 자주찾는 메뉴 리스트 데이터 불러오기
-fetch('./assets/data/user_favorite_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('user-favorite-list');
-
-  data.forEach(item => {
-    const liEl = document.createElement('li');
-    liEl.classList.add('user-menu-item');
-
-    if (item.liClass) {
-      liEl.classList.add('user-menu-item', item.liClass);
-    } else {
-      liEl.classList.add('user-menu-item');
-    }
-    
-    if (item.liClass === 'title') {
-      liEl.innerHTML = `
-        <span>${item.title}</span>
-      `;
-    } else {
-      item.links.forEach(link => {
-        const aEl = document.createElement('a');
-        aEl.href = link.href;
-
-        if (link.linkClass) {
-          aEl.classList.add('user-menu-link', link.linkClass);
-        } else {
-          aEl.classList.add('user-menu-link');
-        }
-        aEl.title = link.linkTitle;
-        aEl.textContent = link.text;
-
-        liEl.appendChild(aEl);
-      });
-    }
-
-    ulEl.appendChild(liEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** footer 시민 리스트 데이터 불러오기
-fetch('./assets/data/user_citizen_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('user-citizen-list');
-
-  data.forEach(item => {
-    const liEl = document.createElement('li');
-    liEl.classList.add('user-menu-item');
-
-    if (item.liClass) {
-      liEl.classList.add('user-menu-item', item.liClass);
-    } else {
-      liEl.classList.add('user-menu-item');
-    }
-    
-    if (item.liClass === 'title') {
-      // liEl.classList.add(item.liClass);
-      liEl.innerHTML = `
-        <span>${item.title}</span>
-      `;
-    } else {
-      item.links.forEach(link => {
-        const aEl = document.createElement('a');
-        aEl.href = link.href;
-
-        if (link.linkClass) {
-          aEl.classList.add('user-menu-link', link.linkClass);
-        } else {
-          aEl.classList.add('user-menu-link');
-        }
-        aEl.title = link.linkTitle;
-        aEl.textContent = link.text;
-
-        liEl.appendChild(aEl);
-      });
-    }
-
-    ulEl.appendChild(liEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** footer 사업자 리스트 데이터 불러오기
-fetch('./assets/data/user_business_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('user-business-list');
-
-  data.forEach(item => {
-    const liEl = document.createElement('li');
-    liEl.classList.add('user-menu-item');
-
-    if (item.liClass) {
-      liEl.classList.add('user-menu-item', item.liClass);
-    } else {
-      liEl.classList.add('user-menu-item');
-    }
-    
-    if (item.liClass === 'title') {
-      // liEl.classList.add(item.liClass);
-      liEl.innerHTML = `
-        <span>${item.title}</span>
-      `;
-    } else {
-      item.links.forEach(link => {
-        const aEl = document.createElement('a');
-        aEl.href = link.href;
-
-        if (link.linkClass) {
-          aEl.classList.add('user-menu-link', link.linkClass);
-        } else {
-          aEl.classList.add('user-menu-link');
-        }
-        aEl.title = link.linkTitle;
-        aEl.textContent = link.text;
-
-        liEl.appendChild(aEl);
-      });
-    }
-
-    ulEl.appendChild(liEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** footer 관광객 리스트 데이터 불러오기
-fetch('./assets/data/user_tour_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('user-tour-list');
-
-  data.forEach(item => {
-    const liEl = document.createElement('li');
-    liEl.classList.add('user-menu-item');
-
-    if (item.liClass) {
-      liEl.classList.add('user-menu-item', item.liClass);
-    } else {
-      liEl.classList.add('user-menu-item');
-    }
-    
-    if (item.liClass === 'title') {
-      // liEl.classList.add(item.liClass);
-      liEl.innerHTML = `
-        <span>${item.title}</span>
-      `;
-    } else {
-      item.links.forEach(link => {
-        const aEl = document.createElement('a');
-        aEl.href = link.href;
-
-        if (link.linkClass) {
-          aEl.classList.add('user-menu-link', link.linkClass);
-        } else {
-          aEl.classList.add('user-menu-link');
-        }
-        aEl.title = link.linkTitle;
-        aEl.textContent = link.text;
-
-        liEl.appendChild(aEl);
-      });
-    }
-
-    ulEl.appendChild(liEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** footer 유용한 정보 리스트 데이터 불러오기
-fetch('./assets/data/user_info_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('user-info-list');
-
-  data.forEach(item => {
-    const liEl = document.createElement('li');
-    liEl.classList.add('user-menu-item');
-
-    if (item.liClass) {
-      liEl.classList.add('user-menu-item', item.liClass);
-    } else {
-      liEl.classList.add('user-menu-item');
-    }
-    
-    if (item.liClass === 'title') {
-      // liEl.classList.add(item.liClass);
-      liEl.innerHTML = `
-        <span>${item.title}</span>
-      `;
-    } else {
-      item.links.forEach(link => {
-        const aEl = document.createElement('a');
-        aEl.href = link.href;
-
-        if (link.linkClass) {
-          aEl.classList.add('user-menu-link', link.linkClass);
-        } else {
-          aEl.classList.add('user-menu-link');
-        }
-        aEl.title = link.linkTitle;
-        aEl.textContent = link.text;
-
-        liEl.appendChild(aEl);
-      });
-    }
-
-    ulEl.appendChild(liEl);
-  });
-})
-.catch(error => console.error('Error loading JSON data:', error));
-
-// ** footer m favorite
-fetch('./assets/data/user_favorite_list.json')
-  .then(response => response.json())
-  .then(data => {
-    const ulEl = document.getElementById('m-user-favorite-list');
-
-    const li = document.createElement('li');
-    li.classList.add('m-user-menu-item');
-
-    const ulDepth02 = document.createElement('ul');
-    ulDepth02.classList.add('depth02-list');
-
-    data.forEach(item => {
-      
-      if (item.liClass === 'title') {
-
-        const a = document.createElement('a');
-        a.href = "#";
-        a.classList.add('m-user-menu-link');
-        a.textContent = item.title;
-
-        li.appendChild(a);
-      } else {
-
-
-        li.appendChild(ulDepth02);
-
-        const liDepth02 = document.createElement('li');
-        if (item.liClass) {
-          liDepth02.classList.add('depth02-item', item.liClass);
-        } else {
-          liDepth02.classList.add('depth02-item');
-        }
-
-        item.links.forEach(link => {
-          const aDepth02 = document.createElement('a');
-          aDepth02.href = link.href;
-          aDepth02.title = link.linkTitle;
-          if (link.linkClass) {
-            aDepth02.classList.add('depth02-link', link.linkClass);
-          } else {
-            aDepth02.classList.add('depth02-link');
+    // 🔹 Swiper 초기화
+    const serviceSwiper = new Swiper(".sc-service .swiper", {
+      loop: true,
+      slidesPerView: 4,
+      spaceBetween: 28,
+      grid: {
+        rows: 2,
+        fill: "row"
+      },
+      autoplay: {
+        delay: 3000,
+      },
+      speed: 1000,
+      keyboard: { enabled: true },
+      navigation: {
+        nextEl: ".sc-service .nav .swiper-button-next",
+        prevEl: ".sc-service .nav .swiper-button-prev"
+      },
+      a11y: {
+        prevSlideMessage: '이전 보기',
+        nextSlideMessage: '다음 보기',
+      },
+      breakpoints: {
+        767: {
+          slidesPerView: 6,
+          spaceBetween: 16,
+          grid: {
+            rows: 1,
+          },
+        },
+        1100: {
+          spaceBetween: 5,
+          grid: {
+            rows: 2,
           }
-          aDepth02.textContent = link.text;
-
-          liDepth02.appendChild(aDepth02);
-        });
-
-        ulDepth02.appendChild(liDepth02);
+        }
+      },
+      on: {
+        init: function () {
+          updateSlideAccessibility(this); // 초기화 시 설정
+        },
+        slideChange: function () {
+          setTimeout(() => {
+            if (!this.allowSlideNext && !this.allowSlidePrev) {
+              this.slideTo(this.realIndex, 0, false);
+            }
+            updateSlideAccessibility(this);
+          }, 0); // 0ms 지연으로 이벤트 루프에서 실행
+        },
+        slideChangeTransitionEnd: function () {
+          updateSlideAccessibility(this); // 슬라이드 변경 시 업데이트
+        },
       }
-      
-      ulEl.appendChild(li);
     });
-  })
-  .catch(error => console.error('Error loading JSON:', error));
 
-// footer m 시민 데이터 불러오기
-fetch('./assets/data/user_citizen_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('m-user-citizen-list');
-
-  const li = document.createElement('li');
-  li.classList.add('m-user-menu-item');
-
-  const ulDepth02 = document.createElement('ul');
-  ulDepth02.classList.add('depth02-list');
-  
-  data.forEach(item => {
-    
-    if (item.liClass === 'title') {
-
-      const a = document.createElement('a');
-      a.href = "#";
-      a.classList.add('m-user-menu-link');
-      a.textContent = item.title;
-
-      li.appendChild(a);
-    } else {
-
-
-      li.appendChild(ulDepth02);
-
-      const liDepth02 = document.createElement('li');
-      if (item.liClass) {
-        liDepth02.classList.add('depth02-item', item.liClass);
-      } else {
-        liDepth02.classList.add('depth02-item');
+    let isPlaying = true;
+    $('.sc-service .swiper-button-play').on('click keydown', function(e) {
+      if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") {
+        return;
       }
 
-      item.links.forEach(link => {
-        const aDepth02 = document.createElement('a');
-        aDepth02.href = link.href;
-        aDepth02.title = link.linkTitle;
-        if (link.linkClass) {
-          aDepth02.classList.add('depth02-link', link.linkClass);
-        } else {
-          aDepth02.classList.add('depth02-link');
-        }
-        aDepth02.textContent = link.text;
-
-        liDepth02.appendChild(aDepth02);
-      });
-
-      ulDepth02.appendChild(liDepth02);
-    }
-    
-    ulEl.appendChild(li);
-  });
-})
-.catch(error => console.error('Error loading JSON:', error));
-
-// footer m 사업자 데이터 불러오기
-fetch('./assets/data/user_business_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('m-user-business-list');
-
-  const li = document.createElement('li');
-  li.classList.add('m-user-menu-item');
-
-  const ulDepth02 = document.createElement('ul');
-  ulDepth02.classList.add('depth02-list');
-
-  data.forEach(item => {
-    
-    if (item.liClass === 'title') {
-
-      const a = document.createElement('a');
-      a.href = "#";
-      a.classList.add('m-user-menu-link');
-      a.textContent = item.title;
-
-      li.appendChild(a);
-    } else {
-
-
-      li.appendChild(ulDepth02);
-
-      const liDepth02 = document.createElement('li');
-      if (item.liClass) {
-        liDepth02.classList.add('depth02-item', item.liClass);
+      if (isPlaying) {
+        serviceSwiper.autoplay.stop();
+        $(this).addClass('paused');
+        $(this).children('span').text('정지');
       } else {
-        liDepth02.classList.add('depth02-item');
+        serviceSwiper.autoplay.start();
+        $(this).removeClass('paused');
+        $(this).children('span').text('재생');
       }
-
-      item.links.forEach(link => {
-        const aDepth02 = document.createElement('a');
-        aDepth02.href = link.href;
-        aDepth02.title = link.linkTitle;
-        if (link.linkClass) {
-          aDepth02.classList.add('depth02-link', link.linkClass);
-        } else {
-          aDepth02.classList.add('depth02-link');
-        }
-        aDepth02.textContent = link.text;
-
-        liDepth02.appendChild(aDepth02);
-      });
-
-      ulDepth02.appendChild(liDepth02);
-    }
-    
-    ulEl.appendChild(li);
-  });
-})
-.catch(error => console.error('Error loading JSON:', error));
-
-  // footer m 관광객 데이터 불러오기
-fetch('./assets/data/user_tour_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('m-user-tour-list');
-
-  const li = document.createElement('li');
-  li.classList.add('m-user-menu-item');
-
-  const ulDepth02 = document.createElement('ul');
-  ulDepth02.classList.add('depth02-list');
-  
-  data.forEach(item => {
-    
-    if (item.liClass === 'title') {
-
-      const a = document.createElement('a');
-      a.href = "#";
-      a.classList.add('m-user-menu-link');
-      a.textContent = item.title;
-
-      li.appendChild(a);
-    } else {
+      isPlaying = !isPlaying;
+    });
+  } catch (error) {
+    console.error("🚨 오류 발생:", error.message);
+    swiperWrapper.innerHTML = "<p>슬라이드를 불러올 수 없습니다.</p>"; // 오류 발생 시 안내 메시지
+  }
+});
 
 
-      li.appendChild(ulDepth02);
+document.addEventListener("DOMContentLoaded", async () => {
+  const modalCt = document.querySelector(".sc-service .modal .content-list");
+  const jsonURL = "../assets/data/service.json";
 
-      const liDepth02 = document.createElement('li');
-      if (item.liClass) {
-        liDepth02.classList.add('depth02-item', item.liClass);
-      } else {
-        liDepth02.classList.add('depth02-item');
-      }
+  try {
+    const response = await fetch(jsonURL);
+    if (!response.ok) throw new Error("대구시 운영서비스: 데이터를 가져오는데 실패했습니다.");
+    const data = await response.json();
 
-      item.links.forEach(link => {
-        const aDepth02 = document.createElement('a');
-        aDepth02.href = link.href;
-        aDepth02.title = link.linkTitle;
-        if (link.linkClass) {
-          aDepth02.classList.add('depth02-link', link.linkClass);
-        } else {
-          aDepth02.classList.add('depth02-link');
-        }
-        aDepth02.textContent = link.text;
+    if (!Array.isArray(data) || data.length === 0) throw new Error("대구시 운영서비스: 유효한 데이터가 없습니다.");
 
-        liDepth02.appendChild(aDepth02);
-      });
-
-      ulDepth02.appendChild(liDepth02);
-    }
-    
-    ulEl.appendChild(li);
-  });
-})
-.catch(error => console.error('Error loading JSON:', error));
-
-// footer m 유용한 정보 데이터 불러오기
-fetch('./assets/data/user_info_list.json')
-.then(response => response.json())
-.then(data => {
-  const ulEl = document.getElementById('m-user-info-list');
-
-  const li = document.createElement('li');
-  li.classList.add('m-user-menu-item');
-
-  const ulDepth02 = document.createElement('ul');
-  ulDepth02.classList.add('depth02-list');
-  
-  data.forEach(item => {
-    
-    if (item.liClass === 'title') {
-
-      const a = document.createElement('a');
-      a.href = "#";
-      a.classList.add('m-user-menu-link');
-      a.textContent = item.title;
-
-      li.appendChild(a);
-    } else {
+    modalCt.innerHTML = data.map(item => `
+      <li class="content-item">
+        <a href="${item.link}" class="service-link" title="새창">
+          <div class="img-wrap">
+            <img src="${item.src}" alt="${item.title}">
+          </div>
+          <span class="title">${item.title}</span>
+        </a>
+      </li>
+    `).join("");
 
 
-      li.appendChild(ulDepth02);
-
-      const liDepth02 = document.createElement('li');
-      if (item.liClass) {
-        liDepth02.classList.add('depth02-item', item.liClass);
-      } else {
-        liDepth02.classList.add('depth02-item');
-      }
-
-      item.links.forEach(link => {
-        const aDepth02 = document.createElement('a');
-        aDepth02.href = link.href;
-        aDepth02.title = link.linkTitle;
-        if (link.linkClass) {
-          aDepth02.classList.add('depth02-link', link.linkClass);
-        } else {
-          aDepth02.classList.add('depth02-link');
-        }
-        aDepth02.textContent = link.text;
-
-        liDepth02.appendChild(aDepth02);
-      });
-
-      ulDepth02.appendChild(liDepth02);
-    }
-    
-    ulEl.appendChild(li);
-  });
-})
-.catch(error => console.error('Error loading JSON:', error));
+  } catch (error) {
+    console.error("🚨 오류 발생:", error.message);
+    modalCt.innerHTML = "<p>슬라이드를 불러올 수 없습니다.</p>";
+  }
+});
 // ** 데이터 불러오는 영역 끝 **
 
 
-// 분기점
+// 분기점 설정
 const pcMediaQuery = window.matchMedia('(min-width: 768px)');
 const mMediaQuery = window.matchMedia('(max-width: 767px)');
 
 
-// ** header 영역 **
+// ❗ header 영역 **
 // gnb
 $('#header #gnb').on('mouseenter focusin', function() {
   $('#header').addClass('on');
@@ -933,10 +590,11 @@ $('#header .util-area .btn-select').on('mousedown', function(e) {
   e.stopPropagation();
   $(this).siblings().toggleClass('on').parent().siblings().find('.select-list').removeClass('on');
 })
-$('#header .util-area .btn-select').on('focusin', function(e) {
-  e.stopPropagation();
-  $(this).siblings().addClass('on').parent().siblings().find('.select-list').removeClass('on');
-})
+$('#header .util-area .btn-select').on('keydown', function(e) { 
+  if (e.key === 'Enter' || e.which === 13) {
+    $(this).siblings().addClass('on').parent().siblings().find('.select-list').removeClass('on');
+  }
+});
 $('#header .util-area .select-list').on('focusout', function(e) {
   if (!$(this).has(e.relatedTarget).length) {
     $(this).removeClass('on');
@@ -1004,6 +662,7 @@ const spotSwiper = new Swiper('.sc-guide .spot-swiper .swiper', {
   autoplay: {
     delay: 5000,
   },
+  keyboard: { enabled: true },
   pagination: {
     el: '.sc-guide .spot-swiper .swiper-pagination',
     type: "fraction",
@@ -1016,19 +675,46 @@ const spotSwiper = new Swiper('.sc-guide .spot-swiper .swiper', {
     nextEl: '.sc-guide .spot-swiper .swiper-button-next',
     prevEl: '.sc-guide .spot-swiper .swiper-button-prev',
   },
+  a11y: {
+    prevSlideMessage: '이전 보기',
+    nextSlideMessage: '다음 보기',
+  },
+  on: {
+    init: function () {
+      updateSlideAccessibility(this);
+    },
+    slideChange: function () {
+      setTimeout(() => {
+        if (!this.allowSlideNext && !this.allowSlidePrev) {
+          this.slideTo(this.realIndex, 0, false);
+        }
+        updateSlideAccessibility(this);
+      }, 0); 
+    },
+    slideChangeTransitionEnd: function () {
+      updateSlideAccessibility(this);
+    },
+  }
 });
 // 재생버튼
 let spotIsPlaying = true;
-$('.sc-guide .spot-swiper .swiper-button-play').on('click', function() {
-  if (spotIsPlaying) {
-    spotSwiper.autoplay.stop(); //
-    $(this).addClass('paused');
-  } else {
-    spotSwiper.autoplay.start();
-    $(this).removeClass('paused');
+$('.sc-guide .spot-swiper .swiper-button-play').on('click keydown', function(e) {
+  if (e.key === 'Enter' || e.which === 13 || e.type === "click") {
+
+    if (spotIsPlaying) {
+      spotSwiper.autoplay.stop();
+      $(this).addClass('paused');
+      $(this).children('span').text('정지');
+    } else {
+      spotSwiper.autoplay.start();
+      $(this).removeClass('paused');
+      $(this).children('span').text('재생');
+    }
+    spotIsPlaying = !spotIsPlaying;
   }
-  spotIsPlaying = !spotIsPlaying;
+  
 });
+
 
 $('.sc-guide .search-area .weather-wrap .weather-link').on('focusin', function() {
   $(this).children('.tooltip').addClass('on');
@@ -1073,14 +759,21 @@ $(document).on('click', function(e) {
 
 
 // ** .sc-notice 영역 **
-$('.sc-notice .group-header .more-link').on('click', function(e) {
-  e.preventDefault();
-  $('body').css({'overflow':'hidden'});
-  $('.sc-notice .group-modal').addClass('on');
+$('.sc-notice .group-content .nav .more-link').on('click keydown', function(e) {
+  if (e.key === 'Enter' || e.witch === 13 || e.type === 'click') {
+    e.preventDefault();
+    $('body').css({'overflow':'hidden'});
+    $('.sc-notice .modal').addClass('on');
+    setTimeout(() => {
+      $('.sc-notice .modal').attr('tabindex', '-1').focus();
+    }, 100); // 약간의 딜레이를 주면서 더 안정적으로 작동되게
+  }
 })
-$('.sc-notice .group-modal .btn-close').on('click', function() {
+$('.sc-notice .modal .btn-close').on('click', function() {
   $('body').css({'overflow':'visible'});
-  $('.sc-notice .group-modal').removeClass('on');
+  $('.sc-notice .modal').removeClass('on');
+  // 원래 위치로 포커스 이동
+  $('.sc-notice .group-content .nav .more-link').focus();
 })
 // ** .sc-notice 영역 끝 **
 
@@ -1096,6 +789,10 @@ $('.sc-quick-tab .tab-list .tab-item').on('click keydown', function (e) {
     $(this).addClass('on').siblings().removeClass('on');
     $('#' + tabName).addClass('on').siblings().removeClass('on');
   }
+
+  // title 속성 업데이트
+  $('.tab-link').attr('title', '비활성'); // 모든 링크의 title을 '비활성'으로 변경
+  $(this).find('.tab-link').attr('title', '활성');
 });
 // ** .sc-quick-tab 영역 끝 **
 
@@ -1145,31 +842,66 @@ const blogSwiper = new Swiper('.sc-sns .swiper', {
     nextEl: '.sc-sns .swiper-button-next',
     prevEl: '.sc-sns .swiper-button-prev',
   },
+  a11y: {
+    prevSlideMessage: '이전 보기',
+    nextSlideMessage: '다음 보기',
+  },
+  on: {
+    init: function () {
+      updateSlideAccessibility(this);
+    },
+    slideChange: function () {
+      setTimeout(() => {
+        if (!this.allowSlideNext && !this.allowSlidePrev) {
+          this.slideTo(this.realIndex, 0, false);
+        }
+        updateSlideAccessibility(this);
+      }, 0);
+    },
+    slideChangeTransitionEnd: function () {
+      updateSlideAccessibility(this);
+    },
+  }
 });
 // 재생버튼
 let blogIsPlaying = true;
-$('.sc-sns .swiper .swiper-button-play').on('click', function() {
-  if (blogIsPlaying) {
-    blogSwiper.autoplay.stop(); //
-    $(this).addClass('paused');
-  } else {
-    blogSwiper.autoplay.start();
-    $(this).removeClass('paused');
+$('.sc-sns .swiper .swiper-button-play').on('click keydown', function(e) {
+  if (e.key === 'Enter' || e.witch === 13 || e.type === 'click') {
+    e.preventDefault();
+
+    if (blogIsPlaying) {
+      blogSwiper.autoplay.stop();
+      $(this).addClass('paused');
+      $(this).children('span').text('정지')
+    } else {
+      blogSwiper.autoplay.start();
+      $(this).removeClass('paused');
+      $(this).children('span').text('재생')
+    }
+    blogIsPlaying = !blogIsPlaying;
   }
-  blogIsPlaying = !blogIsPlaying;
 });
 // ** .sc-blog 영역 끝 **
 
 
 // ** .sc-service 영역 **
-$('.sc-service .group-content .swiper-nav .service-more-link').on('click', function(e) {
-  e.preventDefault();
-  $('body').css({'overflow':'hidden'});
-  $('.sc-service .group-modal').addClass('on');
+$('.sc-service .nav .button-open').on('click keydown', function(e) {
+  if (e.key === 'Enter' || e.witch === 13 || e.type === 'click') {
+    e.preventDefault();
+    $('body').css({'overflow':'hidden'});
+    $('.sc-service .modal').addClass('on');
+    setTimeout(() => {
+      $('.sc-service .modal').attr('tabindex', '-1').focus();
+    }, 100);
+  }
 })
-$('.sc-service .group-modal .btn-close').on('click', function() {
-  $('body').css({'overflow':'visible'});
-  $('.sc-service .group-modal').removeClass('on');
+$('.sc-service .modal .btn-close').on('click keydown', function(e) {
+  if (e.key === 'Enter' || e.witch === 13 || e.type === 'click') {
+    e.preventDefault();
+    $('body').css({'overflow':'visible'});
+    $('.sc-service .modal').removeClass('on');
+    $('.sc-service .nav .button-open').attr('tabindex', '-1').focus();
+  }
 })
 // ** .sc-service 영역 끝 **
 
@@ -1181,10 +913,12 @@ $('#footer .top .btn-select-basic').on('mousedown', function() {
   $(this).toggleClass('on');
   $(this).siblings().toggleClass('on');
 })
-$('#footer .top .btn-select-basic').on('focusin', function() {
-  $(this).addClass('on');
-  $(this).siblings().addClass('on');
-})
+$('#footer .top .btn-select-basic').on('keydown', function(e) { 
+  if (e.key === 'Enter' || e.which === 13) {
+    $(this).addClass('on');
+    $(this).siblings().addClass('on');
+  }
+});
 $('#footer .top .select-list').on('focusout', function(e) {
   if (!$(this).has(e.relatedTarget).length) {
     $(this).removeClass('on');
@@ -1192,19 +926,26 @@ $('#footer .top .select-list').on('focusout', function(e) {
   }
 })
 
-$('#footer .top .btn-select-point').on('mousedown', function() {
+$('#footer .top .btn-select-point').on('click', function() {
   if (pcMediaQuery.matches) {
     $(this).toggleClass('on');
-    $('#footer .top .user-menu-wrap').toggleClass('on');
+    $('#footer .top .user-menu-list').toggleClass('on');
+  }
+  if (mMediaQuery.matches) {
+    $('body').css({'overflow':'hidden'});
+    $('#footer .top .user-menu-list').toggleClass('on');
   }
 })
-$('#footer .top .btn-select-point').on('focusin', function() {
+$('#footer .top .btn-select-point').on('keydown', function(e) { 
   if (pcMediaQuery.matches) {
-    $(this).addClass('on');
-    $('#footer .top .user-menu-wrap').addClass('on');
+    if (e.key === 'Enter' || e.which === 13) {
+      e.preventDefault();
+      $(this).toggleClass('on');
+      $('#footer .top .user-menu-list').toggleClass('on');
+    }
   }
-})
-$('#footer .top .user-menu-wrap').on('focusout', function(e) {
+});
+$('#footer .top .user-menu-list').on('focusout', function(e) {
   if (pcMediaQuery.matches) {
     if (!$(this).has(e.relatedTarget).length) {
       $(this).removeClass('on');
@@ -1213,22 +954,17 @@ $('#footer .top .user-menu-wrap').on('focusout', function(e) {
   }
 })
 
-// 버튼 클릭 이벤트
-$('#footer .top .btn-select-point').on('click', function() {
-  if (mMediaQuery.matches) {
-    $('body').css({'overflow':'hidden'});
-    $('#footer .m-user-menu').addClass('on');
-  }
-});
-$('#footer .m-user-menu .btn-close').on('click', function() {
+// 모바일
+$('#footer .user-menu-list .btn-close').on('click', function() {
   if (mMediaQuery.matches) {
     $('body').css({'overflow':'visible'});
-    $('#footer .m-user-menu').removeClass('on');
+    $('#footer .user-menu-list').removeClass('on');
   }
 });
-
-$(document).on("click",".m-user-menu-link",function(){
-  $(this).addClass('on').next().slideDown();
+$('#footer .user-menu-list .user-menu-item').on('click', function() {
+  if (mMediaQuery.matches) {
+    $(this).children('.depth02').toggleClass('on').parent().siblings().children('.depth02').removeClass('on');
+  }
 })
 
 
@@ -1236,5 +972,51 @@ $(document).on("click",".m-user-menu-link",function(){
 
 
 
+// swiper slide 포커스 관련
+function updateSlideAccessibility(swiper) {
+  swiper.slides.forEach((slide) => {
+    slide.setAttribute("aria-hidden", "true");
+    slide.querySelectorAll("a, button, input, textarea, select").forEach((el) => {
+      el.setAttribute("tabindex", "-1");
+      el.removeEventListener("focus", handleFocus);
+      el.removeEventListener("blur", handleBlur);
+    });
+  });
+
+  // 현재 화면에 보이는 슬라이드 활성화
+  swiper.slides.forEach((slide) => {
+    const slideRect = slide.getBoundingClientRect();
+    const swiperRect = swiper.el.getBoundingClientRect();
+
+    if (slideRect.left >= swiperRect.left && slideRect.right <= swiperRect.right) {
+      slide.setAttribute("aria-hidden", "false");
+      slide.querySelectorAll("a, button, input, textarea, select").forEach((el) => {
+        el.setAttribute("tabindex", "0");
+
+        // 포커스 이동 시 슬라이드 강제 이동 방지
+        el.addEventListener("focus", (event) => {
+          event.target.focus({ preventScroll: true });
+          handleFocus(swiper);
+        });
+
+        el.addEventListener("blur", () => handleBlur(swiper));
+      });
+    }
+  });
+}
+
+// 포커스 이벤트 핸들러
+function handleFocus(swiper) {
+  swiper.autoplay.stop(); // 포커스 시 자동 재생 멈춤
+  swiper.allowSlideNext = false; // 오른쪽 이동 방지
+  swiper.allowSlidePrev = false; // 왼쪽 이동 방지
+}
+
+// 포커스 해제 시 원래 상태 복원
+function handleBlur(swiper) {
+  swiper.autoplay.start(); // 포커스 해제 시 자동 재생 다시 시작
+  swiper.allowSlideNext = true;
+  swiper.allowSlidePrev = true;
+}
 
 

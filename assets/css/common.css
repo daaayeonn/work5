@@ -25,11 +25,6 @@ body {
   background: #fff;
   border-bottom: 1px solid #dcdcdc;
 }
-/* .egov.active {
-  position: fixed;
-  width: 100%;
-  z-index: 999;
-} */
 .egov .egov-text {
   display: flex;
   align-items: center;
@@ -123,7 +118,7 @@ body {
 .swiper {
   position: static;
 }
-.swiper .swiper-nav {
+.swiper .nav {
   display: flex;
   align-items: center;
 }
@@ -133,7 +128,7 @@ body {
   position: static;
   width: auto;
   font-size: 18px;
-  margin-right: 18px;
+  margin-right: 4px;
 }
 .swiper .swiper-pagination-current {
   display: flex;
@@ -199,7 +194,7 @@ body {
   background-position: 0 -11px;
 }
 .swiper .swiper-button-play.paused::after {
-  background-position: 2px -21px;
+  background-position: 1px -21px;
 }
 
 
@@ -219,7 +214,7 @@ body {
 }
 
 
-.group-modal {
+.modal {
   display: none;
   position: fixed;
   top: 0;
@@ -229,59 +224,61 @@ body {
   background: #112441;
   z-index: 1000;
 }
-.group-modal .modal-inner {
+.modal.on {
+  display: block;
+  visibility: visible;
+}
+.modal .wrapper {
   position: absolute;
-  top: 15px;
-  bottom: 15px;
-  left: 15px;
-  right: 15px;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
   max-width: 1478px;
   max-height: 790px;
   margin: auto;
 }
-.group-modal.on {
-  display: block;
-  visibility: visible;
-}
-.group-modal .top {
+.modal .headline-wrap {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #fff;
-  margin-bottom: 50px;
-}
-.group-modal .top .text-wrap {
-  display: flex;
-  align-items: flex-end;
-  gap: 25px;
+  align-items: end;
+  margin-bottom: 43px;
   letter-spacing: -1px;
+  color: #fff;
 }
-.group-modal .top .text-wrap .title {
+.modal .headline-wrap .title {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
+  margin-right: 25px;
+  white-space: nowrap;
 }
-.group-modal .top .text-wrap .desc {
+.modal .headline-wrap .desc {
   font-size: 16px;
+  white-space: nowrap;
 }
-.group-modal .btn-close {
+
+.modal .btn-close {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 46px;
   height: 46px;
   border-radius: 50%;
   background: #fff;
 }
-.group-modal .btn-close::after {
+.modal .btn-close::after {
   content: '';
   width: 22px;
   height: 22px;
   background: url('../images/sp_main.png') no-repeat 100% 100%;
   background-position: -30px -38px;
 }
+
 
 
 
@@ -344,5 +341,24 @@ body {
   }
   .swiper .swiper-button-play.paused::after {
     background-position: 0 -23px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .modal .wrapper {
+    left: 15px;
+    right: 15px;
+  }
+  .modal .headline-wrap {
+    flex-direction: column;
+    align-items: start;
+  }
+  .modal .headline-wrap .title {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  .modal .headline-wrap .desc {
+    font-size: 14px;
   }
 }
