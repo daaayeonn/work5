@@ -440,7 +440,7 @@ fetch('./assets/data/now_test_slides.json')
 // ** .sc-service swiper (대구시 운영 서비스) 데이터 불러오기
 document.addEventListener("DOMContentLoaded", async () => {
   const swiperWrapper = document.querySelector(".sc-service .swiper-wrapper");
-  const jsonURL = "../assets/data/service.json";
+  const jsonURL = "./assets/data/service.json";
 
   try {
     // 🔹 JSON 데이터 불러오기
@@ -465,7 +465,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 🔹 Swiper 초기화
     const serviceSwiper = new Swiper(".sc-service .swiper", {
-      loop: true,
+      loop: false,
       slidesPerView: 4,
       spaceBetween: 28,
       grid: {
