@@ -127,8 +127,8 @@ fetch('./assets/data/notice_slides.json')
 
   const noticeSwiper = new Swiper('.sc-notice .swiper', {
     loop: true,
-    slidesPerView: 2,
-    slidesPerGroup: 2,
+    slidesPerView: 1,
+    slidesPerGroup: 1,
     autoplay: {
       delay: 4000,
     },
@@ -467,7 +467,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const serviceSwiper = new Swiper(".sc-service .swiper", {
       loop: false,
       slidesPerView: 4,
-      spaceBetween: 28,
+      spaceBetween: 10,
       grid: {
         rows: 2,
         fill: "row"
@@ -494,7 +494,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           },
         },
         1100: {
-          spaceBetween: 5,
+          slidesPerView: 4,
+          spaceBetween: 28,
           grid: {
             rows: 2,
           }
@@ -621,10 +622,11 @@ $('#header .util-area .search-wrap .btn-close').on('click', function() {
 // 모바일 메뉴 열기
 $('#header .all-menu-link').on('click', function(e) {
   e.preventDefault();
-
+  console.log('눌림')
   if (mMediaQuery.matches) {
     $('body').css({ 'overflow': 'hidden' });
     $('#header .m-gnb-wrap').addClass('on');
+    console.log('눌리리리리릴ㅁ')
   }
 });
 // 모바일 메뉴 닫기
@@ -646,8 +648,29 @@ $('#header .m-gnb-wrap .m-gnb-item').on('click', function(e) {
 $('#header .m-gnb-wrap .m-depth02-item').on('click', function(e) {
   e.preventDefault();
 
-  $(this).addClass('active').siblings().removeClass('active');
+  $(this).toggleClass('active').siblings().removeClass('active');
   $(this).children('.m-depth03-list').toggleClass('active').parent().siblings().children('.m-depth03-list').removeClass('active');
+})
+// m-depth04 열기
+$('#header .m-gnb-wrap .m-depth03-link').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  $(this).toggleClass('active').siblings().toggleClass('active').parent().siblings().children().removeClass('active');
+})
+// m-depth05 열기
+$('#header .m-gnb-wrap .m-depth04 > li > a').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  $(this).toggleClass('active').siblings().toggleClass('active').parent().siblings().children().removeClass('active');
+})
+// m-depth06 열기
+$('#header .m-gnb-wrap .m-depth05 > li > a').on('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  $(this).toggleClass('active').siblings().toggleClass('active').parent().siblings().children().removeClass('active');
 })
 
 
@@ -963,7 +986,7 @@ $('#footer .user-menu-list .btn-close').on('click', function() {
 });
 $('#footer .user-menu-list .user-menu-item').on('click', function() {
   if (mMediaQuery.matches) {
-    $(this).children('.depth02').toggleClass('on').parent().siblings().children('.depth02').removeClass('on');
+    $(this).toggleClass('active').children('.depth02').toggleClass('active').parent().siblings().removeClass('active').children('.depth02').removeClass('active');
   }
 })
 

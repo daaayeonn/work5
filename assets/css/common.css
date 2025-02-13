@@ -29,7 +29,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 13px;
-  line-height: 43px;
+  height: 43px;
 }
 .egov .egov-text::before {
   content: '';
@@ -106,7 +106,6 @@ body {
 .select-list .select-item .select-link {
   display: block;
   padding: 4px 15px;
-  white-space: nowrap;
 }
 .select-list .select-item .select-link:hover,
 .select-list .select-item .select-link:focus {
@@ -195,22 +194,6 @@ body {
 }
 .swiper .swiper-button-play.paused::after {
   background-position: 1px -21px;
-}
-
-
-.container-flex.m01 .more-link {
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  text-decoration: underline;
-}
-.container-flex.m01 .more-link::after {
-  content: '';
-  width: 13px;
-  height: 13px;
-  background: url('../images/sp_main.png') no-repeat 100% 100%;
-  background-position: -10px -35px;
-  margin-left: 9px;
 }
 
 
