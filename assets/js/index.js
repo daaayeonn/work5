@@ -211,7 +211,7 @@ fetch('./assets/data/notice_slides.json')
 // notice 모달 팝업
 document.addEventListener("DOMContentLoaded", async () => {
   const modalCt = document.querySelector(".sc-notice .modal .content-list");
-  const jsonURL = "../assets/data/notice_slides.json";
+  const jsonURL = "./assets/data/notice_slides.json";
 
   try {
     const response = await fetch(jsonURL);
@@ -539,7 +539,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const modalCt = document.querySelector(".sc-service .modal .content-list");
-  const jsonURL = "../assets/data/service.json";
+  const jsonURL = "./assets/data/service.json";
 
   try {
     const response = await fetch(jsonURL);
