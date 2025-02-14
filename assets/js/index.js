@@ -276,8 +276,8 @@ fetch('./assets/data/now_notice_slides.json')
       enabled: false,
     },
     navigation: {
-      nextEl: '.sc-now .now-notice-swiper-area .swiper-button-next',
-      prevEl: '.sc-now .now-notice-swiper-area .swiper-button-prev',
+      nextEl: '.sc-now .now-notice-swiper-wrap .swiper-button-next',
+      prevEl: '.sc-now .now-notice-swiper-wrap .swiper-button-prev',
     },
     a11y: {
       prevSlideMessage: '이전 보기',
@@ -304,19 +304,13 @@ fetch('./assets/data/now_notice_slides.json')
             this.slideTo(this.realIndex, 0, false);
           }
           updateSlideAccessibility(this);
-        }, 0);
+        }, 0)
       },
       slideChangeTransitionEnd: function () {
         updateSlideAccessibility(this);
       },
     }
   });
-
-  // nowNoticeSwiper.on('slideChange', function () {
-  //   document.querySelectorAll('.swiper-slide[aria-hidden="true"] a').forEach(link => {
-  //       link.setAttribute('tabindex', '-1'); // 비활성화된 슬라이드 내 링크 비활성화
-  //   });
-  // });
 })
 .catch(error => console.error('Error loading JSON data:', error));
 
@@ -354,8 +348,8 @@ fetch('./assets/data/now_test_slides.json')
     },
     speed: 1500,
     navigation: {
-      nextEl: '.sc-now .now-test-swiper-area .swiper-button-next',
-      prevEl: '.sc-now .now-test-swiper-area .swiper-button-prev',
+      nextEl: '.sc-now .now-test-swiper-wrap .swiper-button-next',
+      prevEl: '.sc-now .now-test-swiper-wrap .swiper-button-prev',
     },
     a11y: {
       prevSlideMessage: '이전 보기',
@@ -385,7 +379,7 @@ fetch('./assets/data/now_test_slides.json')
 fetch('./assets/data/now_notice_slides.json')
 .then(response => response.json())
 .then(data => {
-  // 데이터를 4개만 선택
+  
   const limitedData = data.slice(0, 4); // 데이터의 상위 4개를 선택
 
  
@@ -704,18 +698,18 @@ const spotSwiper = new Swiper('.sc-guide .spot-swiper .swiper', {
   },
   on: {
     init: function () {
-      updateSlideAccessibility(this);
+      fadeUpdateSlideAccessibility(this);
     },
     slideChange: function () {
       setTimeout(() => {
         if (!this.allowSlideNext && !this.allowSlidePrev) {
           this.slideTo(this.realIndex, 0, false);
         }
-        updateSlideAccessibility(this);
+        fadeUpdateSlideAccessibility(this);
       }, 0); 
     },
     slideChangeTransitionEnd: function () {
-      updateSlideAccessibility(this);
+      fadeUpdateSlideAccessibility(this);
     },
   }
 });
@@ -871,18 +865,18 @@ const blogSwiper = new Swiper('.sc-sns .swiper', {
   },
   on: {
     init: function () {
-      updateSlideAccessibility(this);
+      fadeUpdateSlideAccessibility(this);
     },
     slideChange: function () {
       setTimeout(() => {
         if (!this.allowSlideNext && !this.allowSlidePrev) {
           this.slideTo(this.realIndex, 0, false);
         }
-        updateSlideAccessibility(this);
-      }, 0);
+        fadeUpdateSlideAccessibility(this);
+      }, 0)
     },
     slideChangeTransitionEnd: function () {
-      updateSlideAccessibility(this);
+      fadeUpdateSlideAccessibility(this);
     },
   }
 });
@@ -1027,6 +1021,36 @@ function updateSlideAccessibility(swiper) {
     }
   });
 }
+
+// sc-guide, sc-sns 슬라이드
+function fadeUpdateSlideAccessibility(swiper) {
+  swiper.slides.forEach((slide) => {
+    slide.setAttribute("aria-hidden", "true");
+    slide.querySelectorAll("a, button, input, textarea, select").forEach((el) => {
+      el.setAttribute("tabindex", "-1");
+      el.removeEventListener("focus", handleFocus);
+      el.removeEventListener("blur", handleBlur);
+    });
+  });
+
+  // 현재 보이는 슬라이드만 활성화 (fade 모드 대응)
+  const activeSlide = swiper.slides[swiper.activeIndex];
+  if (activeSlide) {
+    activeSlide.setAttribute("aria-hidden", "false");
+    activeSlide.querySelectorAll("a, button, input, textarea, select").forEach((el) => {
+      el.setAttribute("tabindex", "0");
+
+      // 포커스 이동 시 슬라이드 강제 이동 방지
+      el.addEventListener("focus", (event) => {
+        event.target.focus({ preventScroll: true });
+        handleFocus(swiper);
+      });
+
+      el.addEventListener("blur", () => handleBlur(swiper));
+    });
+  }
+}
+
 
 // 포커스 이벤트 핸들러
 function handleFocus(swiper) {
