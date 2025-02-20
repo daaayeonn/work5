@@ -12,6 +12,28 @@ body {
   clip: rect(0,0,0,0);
 }
 
+#skip-nav {
+  position: relative;
+}
+#skip-nav a {
+  display: block;
+  position: absolute;
+  top: -41px;
+  left: 0;
+  z-index: 1001;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  background: #4764ce;
+  color: #fff;
+  transition: top .3s;
+}
+#skip-nav a:hover,
+#skip-nav a:active,
+#skip-nav a:focus {
+  top: 0;
+}
+
 .inner {
   max-width: 1700px;
   margin: 0 auto;

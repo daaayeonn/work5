@@ -570,7 +570,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // 분기점 설정
 const pcMediaQuery = window.matchMedia('(min-width: 768px)');
+const tabletMediaQuery = window.matchMedia('(max-width: 1024px)');
 const mMediaQuery = window.matchMedia('(max-width: 767px)');
+
+
+let lsScrollY = window.scrollY;
+
+window.addEventListener("scroll", function () {
+  const skipNav = document.querySelector("#skip-nav a");
+  if (window.scrollY === 0) {
+    skipNav.style.top = "0";
+  } else if (window.scrollY > lsScrollY) {
+    skipNav.style.top = "-41px";
+  }
+  lsScrollY = window.scrollY;
+});
 
 
 // ❗ header 영역 **
@@ -617,10 +631,9 @@ $('#header .util-area .search-wrap .btn-close').on('click', function() {
 $('#header .all-menu-link').on('click', function(e) {
   e.preventDefault();
   console.log('눌림')
-  if (mMediaQuery.matches) {
+  if (tabletMediaQuery.matches) {
     $('body').css({ 'overflow': 'hidden' });
     $('#header .m-gnb-wrap').addClass('on');
-    console.log('눌리리리리릴ㅁ')
   }
 });
 // 모바일 메뉴 닫기
