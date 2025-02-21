@@ -575,13 +575,28 @@ const mMediaQuery = window.matchMedia('(max-width: 767px)');
 
 
 let lsScrollY = window.scrollY;
+let isFocused = false;
+const $skipNav = $("#skip-nav a");
 
-window.addEventListener("scroll", function () {
-  const skipNav = document.querySelector("#skip-nav a");
+// 포커스 감지
+$skipNav.on("focus", function () {
+  isFocused = true;
+  $skipNav.css("top", "0");
+});
+
+// 포커스 아웃될 때 원래 위치로 복귀
+$skipNav.on("blur", function () {
+  isFocused = false;
+  $skipNav.css("top", "-41px");
+});
+
+$(window).on("scroll", function () {
+  if (!isFocused) return; // 포커스 없으면 실행 안 함
+
   if (window.scrollY === 0) {
-    skipNav.style.top = "0";
+    $skipNav.css("top", "0");
   } else if (window.scrollY > lsScrollY) {
-    skipNav.style.top = "-41px";
+    $skipNav.css("top", "-41px");
   }
   lsScrollY = window.scrollY;
 });
